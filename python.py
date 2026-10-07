@@ -12,7 +12,7 @@ class Personne :
 
     @nom.setter
     def nom(self, valeur):
-        if type(valeur) is not insistance(str):
+        if not isinstance(valeur, str):
             raise TypeError("Le Type doit etre un str") 
         self._nom = valeur
     
@@ -22,7 +22,7 @@ class Personne :
 
     @prenom.setter
     def prenom(self, valeur):
-        if type(valeur) is not insistance(str):
+        if not isinstance(valeur, str):
             raise TypeError("Le Type doit etre en str")
         self._prenom = valeur
     @property
@@ -30,7 +30,7 @@ class Personne :
         return self._xp
     
     def gagner_xp(self, points: int):
-        if not insistance(points, str):
+        if not isinstance(points, str):
             raise TypeError("le Type doit etre un int")
         if points < 0:
             raise ValueError("La valeur doit etre superieur a 0")
