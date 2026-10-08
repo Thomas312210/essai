@@ -1,3 +1,6 @@
+import random
+
+
 class Personne :
     def __init__(self, nom, prenom):
         self._prenom = prenom
@@ -30,8 +33,38 @@ class Personne :
         return self._xp
     
     def gagner_xp(self, points: int):
-        if not isinstance(points, str):
+        if not isinstance(points, int):
             raise TypeError("le Type doit etre un int")
         if points < 0:
             raise ValueError("La valeur doit etre superieur a 0")
-        self._xp = points
+        self._xp += points
+
+
+
+class Etudiant(Personne):
+    def __init__(self, nom, prenom, annee):
+        super().__init__(nom, prenom)
+        if not isinstance(annee, int):
+            raise TypeError("Le Type doit etre un str")
+        if not 1 <= annee <= 3:
+        #if annee < 1 or annee > 3:
+            raise ValueError("La valeur doit etre compris entre 1 et 3")
+        self._annee = annee
+
+
+    def __str__(self):
+        return f"nom: {self._nom}, Prenom : {self._prenom}, annee: {self._annee} "
+
+    def gagner_xp(self, points: int):
+        super().gagner_xp(points * (self._annee + 1))
+
+
+    def entraide(self, autre_etu: Etudiant):
+        if self._xp > autre_etu._xp:
+            self.gagner_xp(1)
+            autre_etu.gagner_xp(random.randint(8, 12))
+
+        elif self._xp < autre_etu._xp:
+            autre_etu.gagner_xp(1)
+            self.gagner_xp(random.randint(8, 12))
+
