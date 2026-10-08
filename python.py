@@ -62,9 +62,21 @@ class Etudiant(Personne):
     def entraide(self, autre_etu: Etudiant):
         if self._xp > autre_etu._xp:
             self.gagner_xp(1)
-            autre_etu.gagner_xp(random.randint(8, 12))
+            autre_etu.gagner_xp(random.randint(1, 3))
 
         elif self._xp < autre_etu._xp:
             autre_etu.gagner_xp(1)
-            self.gagner_xp(random.randint(8, 12))
+            self.gagner_xp(random.randint(1, 3))
 
+
+class Prof(Personne):
+    def __init__(self,nom, prenom):
+        super().__init__(nom, prenom)
+        self._xp = 10000
+    
+    def expliquer_la_poo(self, p: Personne):
+        if not isinstance(p, Personne):
+            raise TypeError("P doit etre une personne")
+        self.gagner_xp(1)
+        p.gagner_xp(random.randint(8, 12))
+        
