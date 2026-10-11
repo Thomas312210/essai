@@ -80,3 +80,59 @@ class Prof(Personne):
         self.gagner_xp(1)
         p.gagner_xp(random.randint(8, 12))
         
+
+class GroupeTP():
+    def __init__(self, prof, participants):
+        self._prof = prof
+        self._participants = participants
+    
+    @property
+    def prof(self):
+        return self._prof
+
+    @prof.setter
+    def prof(self, nouveau_prof):
+        if not isinstance(nouveau_prof, Prof):
+            raise TypeError("La valeur doit etre un prof")
+        self._prof = nouveau_prof
+
+    @property
+    def participants(self):
+        return self._participants
+
+    @participants.setter
+    def participants(self, nouveau_participants):
+        if not isinstance(nouveau_participants, list):
+            raise TypeError("Le participants doit etre une list")
+        if len (nouveau_participants) < 2:
+            raise ValueError("La liste doit contenir au moins 2 personnes")
+        for participants in nouveau_participants:
+            if not isinstance(participants, Personne):
+                raise TypeError("Le participants doit etre un Personne")
+        self._participants = nouveau_participants
+
+        def expliquer_la_prof(self):
+            for participants in self.participants:
+                self.prof.expliquer_la_poo(participants)
+            
+        def pause_cafe(self) -> None:
+            for i in range(5):
+                p1, p2 = random.sample(self.participants, 2)
+                if isinstance(p1, Etudiant) and isinstance(p2, Etudiant):
+                    p1.entraide(p2)
+            
+        def faire_une_seance(self) -> None:
+            self.expliquer_la_prof()
+            self.pause_cafe()
+            self.expliquer_la_prof()
+
+        def niveau_minimum(self) -> int:
+            minimum = self.participants[0]._xp
+            for participants in self.participants:
+                if participants._xp < self.participants:
+                    minimum = participants._xp
+            return minimum
+
+        def bourriner(self, objectif: int):
+            while self.niveau_minimum < objectif:
+                self.faire_une_seance
